@@ -1,0 +1,580 @@
+/* ============================================================
+   NOCTURNE — 커스텀 스타일 (다크 테마)
+   ============================================================ */
+
+/* ---------- 색상 변수 (조건 ④: 일정한 메인컬러) ----------
+   색을 바꾸려면 아래 여섯 줄만 고치면 전체가 따라옵니다     */
+:root {
+  --bg:      #0B0B0F;   /* 배경 — 거의 검정 */
+  --surface: #16161D;   /* 카드 배경 */
+  --line:    #26262F;   /* 구분선 */
+  --accent:  #8B5CF6;   /* 메인컬러 — 바이올렛 */
+  --ink:     #F5F5F7;   /* 본문 글자 */
+  --muted:   #9A9AA8;   /* 흐린 글자 */
+}
+
+/* 상단 navbar 가 fixed 라서, 메뉴를 눌러 이동하면 섹션 제목이 바 뒤로 숨습니다.
+   그만큼 미리 멈추도록 여유를 줍니다 */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 84px;
+}
+
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  background-color: var(--bg);
+  color: var(--ink);
+  font-weight: 300;
+  line-height: 1.75;
+}
+
+.logo-text,
+.eyebrow,
+.card-step,
+.btn,
+.poster-meta {
+  font-family: 'Jost', sans-serif;
+}
+
+
+/* ============================================================
+   로고
+   ============================================================ */
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+/* 로고 마크 (투명 PNG). 흰색 원본이라 색을 바꾸려면 filter 를 씁니다 */
+.logo-mark {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+  display: inline-block;
+}
+
+.logo-text {
+  font-size: 1.05rem;
+  font-weight: 500;
+  letter-spacing: 4px;
+  color: var(--ink);
+}
+
+
+/* ============================================================
+   내비게이션 바
+   ============================================================ */
+.site-nav {
+  background-color: rgba(11, 11, 15, 0.86);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+  padding-top: 14px;
+  padding-bottom: 14px;
+}
+
+.site-nav .nav-link {
+  color: var(--muted);
+  font-size: 0.93rem;
+  margin-left: 22px;
+}
+
+.site-nav .nav-link:hover {
+  color: var(--ink);
+}
+
+/* 햄버거 아이콘을 밝은 색으로 (기본은 어두워서 안 보임) */
+.navbar-toggler {
+  border-color: var(--line);
+}
+.navbar-toggler-icon {
+  filter: invert(1) opacity(0.7);
+}
+
+
+/* ============================================================
+   버튼
+   ============================================================ */
+.btn-brand {
+  background-color: var(--accent);
+  color: #fff;
+  border: 1px solid var(--accent);
+  border-radius: 3px;
+  padding: 9px 24px;
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+}
+.btn-brand:hover {
+  background-color: #7C3AED;
+  border-color: #7C3AED;
+  color: #fff;
+}
+
+/* 투명한 보조 버튼 */
+.btn-ghost {
+  background-color: rgba(255, 255, 255, 0.12);
+  color: var(--ink);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 3px;
+  padding: 9px 24px;
+  font-size: 0.9rem;
+}
+.btn-ghost:hover {
+  background-color: rgba(255, 255, 255, 0.22);
+  color: var(--ink);
+}
+
+
+/* ============================================================
+   캐러셀
+   ============================================================ */
+.hero-img {
+  height: 88vh;
+  min-height: 520px;
+  object-fit: cover;   /* 비율 유지하고 넘치는 부분만 잘라냄 */
+}
+
+/* 사진 위에 덮는 어두운 막.
+   사진마다 빈 공간 위치가 달라서 세 종류를 만들어 뒀습니다 */
+.hero-shade {
+  position: absolute;
+  inset: 0;
+}
+
+/* 슬라이드 1 — 왼쪽에 사람, 오른쪽을 어둡게 */
+.shade-left {
+  background: linear-gradient(to left, rgba(11,11,15,0.88) 0%, rgba(11,11,15,0.35) 55%, rgba(11,11,15,0.55) 100%);
+}
+/* 슬라이드 2 — 아래쪽만 어둡게 */
+.shade-bottom {
+  background: linear-gradient(to top, rgba(11,11,15,0.95) 0%, rgba(11,11,15,0.15) 55%);
+}
+/* 슬라이드 3 — 위쪽만 어둡게 */
+.shade-top {
+  background: linear-gradient(to bottom, rgba(11,11,15,0.9) 0%, rgba(11,11,15,0.1) 60%);
+}
+
+.hero-caption {
+  bottom: auto;
+  right: auto;
+  left: auto;
+  padding: 0;
+}
+
+/* 글자 위치 3종 */
+.cap-right {
+  top: 50%;
+  right: 7%;
+  transform: translateY(-50%);
+  max-width: 520px;
+  text-align: left;
+}
+.cap-center {
+  left: 50%;
+  bottom: 13%;
+  transform: translateX(-50%);
+  max-width: 640px;
+  text-align: center;
+}
+.cap-top {
+  top: 17%;
+  left: 7%;
+  max-width: 560px;
+  text-align: left;
+}
+
+.hero-title {
+  font-size: 3.2rem;
+  font-weight: 700;
+  line-height: 1.25;
+  margin-bottom: 16px;
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.6);
+}
+
+.hero-sub {
+  font-size: 1rem;
+  color: rgba(245, 245, 247, 0.82);
+  margin-bottom: 26px;
+}
+
+.hero-btns {
+  display: flex;
+  gap: 10px;
+}
+.cap-center .hero-btns { justify-content: center; }
+
+.eyebrow {
+  font-size: 0.72rem;
+  letter-spacing: 3.5px;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+
+/* 인디케이터를 가는 막대 모양으로 */
+.carousel-indicators [data-bs-target] {
+  width: 34px;
+  height: 2px;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.35);
+}
+.carousel-indicators .active {
+  background-color: var(--accent);
+}
+
+
+/* ============================================================
+   섹션 공통
+   ============================================================ */
+.section {
+  padding-top: 84px;
+  padding-bottom: 84px;
+}
+
+.section-tint {
+  background-color: #101016;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.section-title {
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.4;
+  margin-bottom: 14px;
+}
+
+.section-lead {
+  color: var(--muted);
+  font-size: 0.97rem;
+}
+
+
+/* ============================================================
+   가로 스크롤 포스터 줄
+   ============================================================ */
+.row-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.row-sub {
+  color: var(--muted);
+  font-size: 0.88rem;
+  margin-bottom: 22px;
+}
+
+/* flex + overflow-x 두 줄이면 가로 스크롤 줄이 됩니다 */
+.poster-rail {
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  overflow-y: hidden;        /* 마우스 올릴 때 커지는 카드 때문에 세로 스크롤바가 생기는 것 방지 */
+  padding: 6px 2px 22px;
+  scroll-snap-type: x mandatory;
+}
+
+/* 스크롤바를 얇게 */
+.poster-rail::-webkit-scrollbar { height: 5px; }
+.poster-rail::-webkit-scrollbar-thumb {
+  background-color: var(--line);
+  border-radius: 3px;
+}
+
+.poster {
+  flex: 0 0 auto;
+  width: 200px;
+  text-decoration: none;
+  scroll-snap-align: start;
+}
+
+.poster img {
+  width: 100%;
+  aspect-ratio: 2 / 3;      /* 세로 포스터 비율 고정 */
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid var(--line);
+  /* 평소엔 살짝 어둡게 두고 마우스를 올리면 밝아지게 — 넷플릭스식 강조 */
+  filter: brightness(0.78);
+  transition: transform 0.25s ease, border-color 0.25s ease, filter 0.25s ease;
+}
+
+.poster:hover img {
+  transform: scale(1.05);
+  border-color: var(--accent);
+  filter: brightness(1.05);
+}
+
+.poster-meta {
+  display: block;
+  margin-top: 10px;
+  font-size: 0.78rem;
+  color: var(--muted);
+  letter-spacing: 0.4px;
+}
+
+.poster-meta b {
+  display: block;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 0.92rem;
+  color: var(--ink);
+  font-weight: 500;
+}
+
+
+/* ============================================================
+   카드
+   ============================================================ */
+.brand-card {
+  background-color: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+}
+
+.brand-card .card-body {
+  padding: 30px 26px 34px;
+}
+
+.card-step {
+  font-size: 0.78rem;
+  letter-spacing: 2.5px;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+
+.brand-card .card-title {
+  font-size: 1.12rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 10px;
+}
+
+.brand-card .card-text {
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+
+/* ============================================================
+   요금제
+   ============================================================ */
+.plan-price {
+  font-size: 1.1rem;
+  color: var(--muted);
+  margin: 22px 0 10px;
+}
+.plan-price b {
+  font-family: 'Jost', sans-serif;
+  font-size: 3rem;
+  font-weight: 500;
+  color: var(--ink);
+  margin: 0 4px;
+}
+
+
+/* ============================================================
+   창업자 페이지 (about.html)
+   ============================================================ */
+
+/* 상단 navbar 가 fixed 라서 첫 섹션이 가려집니다. 그만큼 위를 띄웁니다 */
+.section-below-nav {
+  padding-top: 150px;
+}
+.founder-photo {
+  width: 100%;
+  max-width: 360px;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  filter: grayscale(0.3);
+}
+
+.founder-role {
+  color: var(--muted);
+  font-size: 0.93rem;
+  margin-bottom: 26px;
+}
+
+.timeline {
+  list-style: none;
+  padding: 0;
+  margin-top: 32px;
+  border-left: 1px solid var(--line);
+}
+
+.timeline li {
+  padding: 0 0 22px 22px;
+  position: relative;
+  color: var(--muted);
+  font-size: 0.93rem;
+}
+
+.timeline li::before {
+  content: '';
+  position: absolute;
+  left: -4px;
+  top: 11px;
+  width: 7px;
+  height: 7px;
+  background-color: var(--accent);
+  border-radius: 50%;
+}
+
+.timeline .year {
+  display: block;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 2.5px;
+  color: var(--accent);
+  margin-bottom: 2px;
+}
+
+
+/* ============================================================
+   푸터
+   ============================================================ */
+.site-footer {
+  background-color: #08080B;
+  border-top: 1px solid var(--line);
+  padding-top: 54px;
+  padding-bottom: 40px;
+}
+
+.site-footer .first-line {
+  padding-bottom: 26px;
+  border-bottom: 1px solid var(--line);
+}
+
+.site-footer .second-line {
+  padding-top: 26px;
+}
+
+/* 링크 기본 스타일(파란색 + 밑줄) 제거 */
+.site-footer .second-line a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.82rem;
+  white-space: nowrap;
+}
+.site-footer .second-line a:hover {
+  color: var(--accent);
+}
+
+/* 세 번째 줄은 평소엔 숨김 → 모바일에서만 나타남 */
+.site-footer .third-line {
+  display: none;
+}
+.site-footer .third-line p {
+  margin: 4px 0;
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+.copyright {
+  margin-top: 32px;
+  font-size: 0.76rem;
+  color: #55555F;
+}
+
+
+/* ============================================================
+   미디어 쿼리 ①  태블릿 (992px 이하)
+   ============================================================ */
+@media screen and (max-width: 992px) {
+
+  .hero-img { height: 74vh; }
+  .hero-title { font-size: 2.2rem; }
+
+  .section { padding-top: 60px; padding-bottom: 60px; }
+  .section-title { font-size: 1.65rem; }
+
+  /* 메뉴가 세로로 펼쳐질 때 정리 */
+  .site-nav .nav-link {
+    margin-left: 0;
+    padding: 9px 0;
+  }
+  .site-nav .btn-brand {
+    display: inline-block;
+    margin-top: 10px;
+  }
+}
+
+
+/* ============================================================
+   미디어 쿼리 ②  모바일 (768px 이하)
+   ============================================================ */
+@media screen and (max-width: 768px) {
+
+  .hero-img { height: 68vh; min-height: 440px; }
+
+  /* 좁은 화면에서는 글자 위치를 셋 다 아래 가운데로 통일 */
+  .cap-right,
+  .cap-center,
+  .cap-top {
+    top: auto;
+    bottom: 12%;
+    left: 6%;
+    right: 6%;
+    transform: none;
+    max-width: none;
+    text-align: center;
+  }
+
+  /* 막도 전부 아래쪽 그라데이션으로 통일 */
+  .shade-left,
+  .shade-bottom,
+  .shade-top {
+    background: linear-gradient(to top, rgba(11,11,15,0.95) 0%, rgba(11,11,15,0.25) 60%);
+  }
+
+  .hero-title { font-size: 1.6rem; }
+  .hero-sub   { font-size: 0.88rem; margin-bottom: 20px; }
+  .hero-btns  { flex-direction: column; align-items: stretch; }
+
+  /* 좌우 화살표는 좁은 화면에서 방해되므로 숨김 */
+  .carousel-control-prev,
+  .carousel-control-next { display: none; }
+
+  .poster { width: 140px; }
+  .plan-price b { font-size: 2.2rem; }
+
+  /* --- 푸터 --- */
+  .site-footer .first-line { text-align: center; }
+
+  /* 링크 9개를 세로로 세움 */
+  .site-footer .second-line .row { flex-direction: column; }
+  .site-footer .second-line .col {
+    flex: 0 0 auto;
+    width: 100%;
+    text-align: center;
+    padding: 7px 0;
+  }
+
+  /* 숨겨뒀던 세 번째 줄을 꺼냄 */
+  .site-footer .third-line {
+    display: block;
+    text-align: center;
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+  }
+
+  .copyright { text-align: center; }
+}
+
+
+/* ============================================================
+   접근성
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  .carousel-item,
+  .poster img { transition: none; }
+}
+
+/* 키보드 탭 이동 시 초점이 보이도록 */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
